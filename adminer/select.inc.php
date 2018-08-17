@@ -334,7 +334,7 @@ if (!$columns && support("table")) {
 						echo '<a href="' . h($href . ($order[0] == $column || $order[0] == $key || (!$order && $is_group && $group[0] == $column) ? $desc : '')) . '">'; // $order[0] == $key - COUNT(*)
 						echo apply_sql_function($val["fun"], $name) . "</a>"; //! columns looking like functions
 						echo "<span class='column hidden'>";
-						echo "<a href='" . h($href . $desc) . "' title='" . lang('descending') . "' class='text'> ↓</a>";
+						echo "<a href='" . h($href . $desc) . "' title='" . lang('descending') . "' class='text'> &darr;</a>";
 						if (!$val["fun"]) {
 							echo '<a href="#fieldset-search" title="' . lang('Search') . '" class="text jsonly"> =</a>';
 							echo script("qsl('a').onclick = partial(selectSearch, '" . js_escape($key) . "');");
