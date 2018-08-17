@@ -292,10 +292,21 @@ if (!$columns && support("table")) {
 		$email_fields = array();
 		echo "<form action='' method='post' enctype='multipart/form-data'>\n";
 		$rows = array();
+
+		$indexing_counter = -1;
 		while ($row = $result->fetch_assoc()) {
+			++$indexing_counter;
+
 			if ($page && $jush == "oracle") {
 				unset($row["RNUM"]);
+			} elseif ($page && $jush == 'sybase') {
+				if ($indexing_counter < $page * $limit) {
+					continue;
+				} elseif ($indexing_counter >= ($page + 1) * $limit) {
+					break;
+				}
 			}
+
 			$rows[] = $row;
 		}
 
