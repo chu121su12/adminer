@@ -284,8 +284,8 @@ function edit_fields($fields, $collations, $type = "TABLE", $foreign_keys = arra
 		echo "<td>";
 		echo (support("move_col") ?
 			"<input type='image' class='icon' name='add[$i]' src='../adminer/static/plus.gif' alt='+' title='" . lang('Add next') . "'> "
-			. "<input type='image' class='icon' name='up[$i]' src='../adminer/static/up.gif' alt='↑' title='" . lang('Move up') . "'> "
-			. "<input type='image' class='icon' name='down[$i]' src='../adminer/static/down.gif' alt='↓' title='" . lang('Move down') . "'> "
+			. "<input type='image' class='icon' name='up[$i]' src='../adminer/static/up.gif' alt='&uarr;' title='" . lang('Move up') . "'> "
+			. "<input type='image' class='icon' name='down[$i]' src='../adminer/static/down.gif' alt='&darr;' title='" . lang('Move down') . "'> "
 		: "");
 		echo ($orig == "" || support("drop_col") ? "<input type='image' class='icon' name='drop_col[$i]' src='../adminer/static/cross.gif' alt='x' title='" . lang('Remove') . "'>" : "");
 	}
