@@ -292,10 +292,21 @@ if (!$columns && support("table")) {
 		$email_fields = array();
 		echo "<form action='' method='post' enctype='multipart/form-data'>\n";
 		$rows = array();
+
+		$indexing_counter = -1;
 		while ($row = $result->fetch_assoc()) {
+			++$indexing_counter;
+
 			if ($page && $jush == "oracle") {
 				unset($row["RNUM"]);
+			} elseif ($page && $jush == 'sybase') {
+				if ($indexing_counter < $page * $limit) {
+					continue;
+				} elseif ($indexing_counter >= ($page + 1) * $limit) {
+					break;
+				}
 			}
+
 			$rows[] = $row;
 		}
 
@@ -429,7 +440,7 @@ if (!$columns && support("table")) {
 								$link .= where_link($i++, $k, $v);
 							}
 						}
-						
+
 						$val = select_value($val, $link, $field, $text_length);
 						$id = h("val[$unique_idf][" . bracket_escape($key) . "]");
 						$value = $_POST["val"][$unique_idf][bracket_escape($key)];
@@ -488,7 +499,7 @@ if (!$columns && support("table")) {
 					echo "\n";
 				}
 			}
-			
+
 			echo "<div class='footer'><div>\n";
 			if ($rows || $page) {
 				if ($pagination) {
@@ -520,7 +531,7 @@ if (!$columns && support("table")) {
 					}
 					echo "</fieldset>\n";
 				}
-				
+
 				echo "<fieldset>";
 				echo "<legend>" . lang('Whole result') . "</legend>";
 				$display_rows = ($exact_count ? "" : "~ ") . $found_rows;
